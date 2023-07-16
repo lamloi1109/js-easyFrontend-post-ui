@@ -90,9 +90,11 @@
   color: white;
   background-color: var(--primary-color);
   border-color: var(--primary-color);
+  border-radius: 3px;
 }
 
 .posts-nav .page-item .page-link {
+  border: none !important;
   color: #444;
 }
 

@@ -4,3 +4,6 @@ export function getPostTemplateElement() {
 export function getPostListElement() {
   return document.getElementById('postList')
 }
+export function getPostPagination() {
+  return document.getElementById('postsPagination')
+}
