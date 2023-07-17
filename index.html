@@ -179,6 +179,20 @@
         <div class="container">
           <h1 class="with-underline text-center">Latest posts</h1>
 
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="searchPostLabel">Search</span>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search Post"
+              aria-label="Search"
+              id="searchPostInput"
+              aria-describedby="searchPostLabel"
+            />
+          </div>
+
           <!-- Posts list -->
           <ul id="postList" class="row posts-list justify-content-center"></ul>
 
@@ -210,6 +224,10 @@
       integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
       crossorigin="anonymous"
     ></script>
+
+    <!-- Lodash Debounce CDN -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/lodash.debounce@4.0.8/index.min.js"></script> -->
+
     <!-- Scripts should be placed here to prevent blocking render UI -->
     <script type="module" src="./js/home.js"></script>
   </body>

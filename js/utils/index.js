@@ -1,3 +1,4 @@
-import { truncateText, setTextContent } from './common.js'
-
-export { truncateText, setTextContent }
+export * from './common.js'
+export * from './search.js'
+export * from './post.js'
+export * from './pagination.js'
