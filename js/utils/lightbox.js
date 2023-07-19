@@ -40,22 +40,16 @@ export function registerLightBox({
   nextButtonSelector,
   closeButtonSelector,
 }) {
-  if (
-    !lightBoxElementSelector ||
-    !previousButtonSelector ||
-    !nextButtonSelector ||
-    !closeButtonSelector
-  )
-    return
-
   const lightBoxElement = document.querySelector(lightBoxElementSelector)
-  if (!lightBoxElement) return
+
+  if (Boolean(lightBoxElement.dataset.register) || !lightBoxElement) return
 
   let imageList = []
   let currentImageIndex = 0
 
   // delegation
   document.addEventListener('click', (event) => {
+    console.log('click')
     const { target } = event
     if (target.tagName !== 'IMG' || !target.dataset.album) return
     // img click -> find all imgs with the same album / gallery
@@ -144,4 +138,6 @@ export function registerLightBox({
   lightBoxElement.addEventListener('click', (event) => {
     if (event.target.tagName == 'SECTION') closeLightBox(lightBoxElement)
   })
+
+  lightBoxElement.dataset.register = 'true'
 }
