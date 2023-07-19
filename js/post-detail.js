@@ -51,6 +51,12 @@ function renderPostDetail(post) {
       nextButtonSelector: '.light-box-main .next',
       closeButtonSelector: '.light-box-main .close',
     })
+    registerLightBox({
+      lightBoxElementSelector: '.light-box',
+      previousButtonSelector: '.light-box-main .previous',
+      nextButtonSelector: '.light-box-main .next',
+      closeButtonSelector: '.light-box-main .close',
+    })
   } catch (error) {
     console.log('post detail error', error)
   }
