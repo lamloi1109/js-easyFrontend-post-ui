@@ -19,9 +19,10 @@
     <!-- Font awesome -->
     <link
       rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
       crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
 
     <!-- Use font Rubik -->
@@ -48,7 +49,9 @@
             </li>
 
             <li class="nav-item">
-              <a id="goToEditPageLink" class="nav-link" href="#"></a>
+              <a id="goToEditPageLink" class="nav-link" href="#"
+                ><i class="fas fa-plus-circle mr-1"> </i>editPage</a
+              >
             </li>
           </ul>
         </div>
@@ -63,7 +66,6 @@
           <div class="post-detail-main shadow-sm">
             <div class="post-title-wrapper">
               <h1 id="postDetailTitle">&nbsp;</h1>
-
               <p>
                 <small class="text-muted">by</small>
                 <small id="postDetailAuthor" class="text-muted font-weight-bold"> &nbsp; </small>
@@ -86,7 +88,12 @@
                 quas ducimus aliquid. Praesentium ea aspernatur vero deserunt.
               </p>
 
-              <img class="post-image" src="https://picsum.photos/1368/800" alt="Picsum photos" />
+              <img
+                data-album="easyFrontend"
+                class="post-image"
+                src="https://picsum.photos/1368/800"
+                alt="Picsum photos"
+              />
 
               <p>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci suscipit
@@ -106,6 +113,18 @@
                 quas ducimus aliquid. Praesentium ea aspernatur vero deserunt.
               </p>
 
+              <img
+                data-album="easyFrontend"
+                class="post-image"
+                src="https://picsum.photos/1368/1000"
+                alt="Picsum photos"
+              />
+
+              <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci suscipit
+                inventore hic tenetur, dolor iusto dolorum rem, non error, saepe quia dignissimos
+                quas ducimus aliquid. Praesentium ea aspernatur vero deserunt.
+              </p>
               <img class="post-image" src="https://picsum.photos/1368/1000" alt="Picsum photos" />
 
               <p>
@@ -119,6 +138,26 @@
       </section>
     </main>
 
+    <section class="light-box hide">
+      <!-- <div class="container"> -->
+      <div class="light-box-main">
+        <button class="light-box-button close" aria-label="Next">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <button class="light-box-button previous" aria-label="Previous">
+          <i class="fa-solid fa-angles-left"></i>
+        </button>
+        <button class="light-box-button next" aria-label="Next">
+          <i class="fa-solid fa-angles-right"></i>
+        </button>
+        <div class="light-box-description">
+          <p id="lightBoxImageName">Nihil expedita eveniet</p>
+          <p id="lightBoxImageNumber">Images 1 / 2</p>
+        </div>
+      </div>
+      <!-- </div> -->
+    </section>
+
     <footer class="text-center text-muted py-3">
       <small>Created by Po with <i class="fas fa-heart"></i></small>
     </footer>
@@ -129,6 +168,6 @@
       crossorigin="anonymous"
     ></script>
     <!-- Scripts should be placed here to prevent blocking render UI -->
-    <!-- <script type="module" src="./js/post-detail.js"></script> -->
+    <script type="module" src="./js/post-detail.js"></script>
   </body>
 </html>

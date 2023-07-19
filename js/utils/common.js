@@ -12,3 +12,10 @@ export function truncateText(text, maxLength) {
   // ellipsis character
   return `${text.slice(0, maxLength - 1)}…`
 }
+
+export function setBackgroundImage(element, url) {
+  if (!element) return
+  element.style.backgroundImage = `url('${url}')`
+  element.style.backgroundRepeat = 'none'
+  element.style.backgroundSize = 'cover'
+}
