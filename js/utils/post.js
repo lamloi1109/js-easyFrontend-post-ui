@@ -1,8 +1,8 @@
 import { getPostListElement, getPostTemplateElement } from './selectors.js'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import { setTextContent, truncateText } from './common.js'
 dayjs.extend(relativeTime)
+import { setTextContent, truncateText } from './common.js'
 export function createLiElement(post) {
   if (!post) return
 
@@ -10,10 +10,6 @@ export function createLiElement(post) {
   if (!postTemplateElement) return
 
   const liElement = postTemplateElement.content.cloneNode(true)
-  // title  - Card Title
-  // description - Card Text
-  // timeSpan - Text Muted
-  // author
   const cardImg = liElement.querySelector(`[data-id=thumbnail]`)
   if (cardImg) {
     cardImg.src = post.imageUrl
@@ -34,6 +30,17 @@ export function createLiElement(post) {
   // relative time from now
   // https://day.js.org/docs/en/plugin/relative-time
   setTextContent(liElement, `[data-id=timeSpan]`, dayjs().from(dayjs(post.updatedAt)))
+
+  const postItemElement = liElement.querySelector('.post-item')
+  console.log(postItemElement)
+  // handle post click
+  postItemElement.addEventListener('click', () => {
+    console.log('click')
+    const url = `${window.location.origin}/post-detail.html?id=${post.id}`
+    // history.pushState({}, '', url)
+    window.location.assign(url)
+    return
+  })
 
   return liElement
 }

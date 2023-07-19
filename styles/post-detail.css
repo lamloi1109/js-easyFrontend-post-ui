@@ -1,4 +1,3 @@
-
 section.hero {
   height: 300px;
   background: #eee;
@@ -10,17 +9,109 @@ section.hero {
 .post-detail .post-detail-main {
   margin-top: -4rem;
   padding: 2rem;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   background-color: white;
 }
 
 .post-detail .post-title-wrapper {
   margin-bottom: 1rem;
-  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-
 
 .post-detail .post-image {
   width: 100%;
   margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.light-box {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 1s ease-in-out;
+  visibility: visible;
+  opacity: 1;
+}
+
+/* .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+} */
+
+.light-box-main {
+  width: 900px;
+  height: 500px;
+  background-color: rgb(255, 255, 255);
+  border: 5px solid white;
+  border-radius: 5px;
+  position: relative;
+  cursor: default;
+}
+
+.light-box-button {
+  position: absolute;
+  top: 50%;
+  border: 0px;
+  background-color: rgb(253, 253, 253);
+  height: 40px;
+  width: 40px;
+  border-radius: 50px;
+  opacity: 1;
+  transition: all 1s;
+}
+
+.light-box-button:hover {
+  opacity: 1;
+}
+
+.light-box-main .previous {
+  left: 0 !important;
+  margin-left: 20px;
+}
+
+.light-box-main .next {
+  right: 0 !important;
+  margin-right: 20px;
+}
+
+.light-box-main .close {
+  top: 0;
+  right: 0 !important;
+  margin: 5px;
+  opacity: 1;
+  background: none;
+}
+
+.light-box-main .light-box-description {
+  position: absolute;
+  bottom: -80px;
+  display: block;
+  color: rgb(197, 197, 225);
+}
+.light-box-main p {
+  margin: 0;
+}
+
+.light-box-main #lightBoxImageName {
+  font-size: 1.5rem;
+}
+.light-box-main #lightBoxImageNumber {
+  font-size: 1.2rem;
+}
+.hide {
+  visibility: hidden;
+  opacity: 0;
 }

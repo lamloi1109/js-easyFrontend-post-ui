@@ -9,8 +9,9 @@ body {
   display: flex;
   flex-flow: column;
   min-height: 100vh;
-
+  min-width: 100vw;
   font-family: 'Rubik', sans-serif;
+  overflow-x: hidden;
 }
 
 body > main {
