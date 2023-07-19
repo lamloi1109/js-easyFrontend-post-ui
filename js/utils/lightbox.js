@@ -49,7 +49,6 @@ export function registerLightBox({
 
   // delegation
   document.addEventListener('click', (event) => {
-    console.log('click')
     const { target } = event
     if (target.tagName !== 'IMG' || !target.dataset.album) return
     // img click -> find all imgs with the same album / gallery

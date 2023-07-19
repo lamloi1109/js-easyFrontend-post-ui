@@ -26,7 +26,11 @@
     />
 
     <!-- Use font Rubik -->
-    <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet" />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css?family=Rubik&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Internal CSS -->
     <link rel="stylesheet" href="./styles/main.css" />
@@ -65,16 +69,25 @@
         <div class="container">
           <div class="post-detail-main shadow-sm">
             <div class="post-title-wrapper">
-              <h1 id="postDetailTitle">&nbsp;</h1>
+              <h1 id="postDetailTitle">
+                <span class="placeholder bg-light" style="width: 30%"></span>
+              </h1>
               <p>
-                <small class="text-muted">by</small>
-                <small id="postDetailAuthor" class="text-muted font-weight-bold"> &nbsp; </small>
-                <small id="postDetailTimeSpan" class="text-muted">&nbsp;</small>
+                <small id="postDetailAuthor" class="text-muted font-weight-bold">
+                  <span class="placeholder bg-light" style="width: 10%"></span>
+                </small>
+                <small id="postDetailTimeSpan" class="text-muted">
+                  <span class="placeholder bg-light" style="width: 10%"></span>
+                </small>
               </p>
             </div>
 
             <div class="post-content-wrapper">
-              <p id="postDetailDescription"></p>
+              <p id="postDetailDescription">
+                <span class="placeholder bg-light w-100"></span>
+                <span class="placeholder bg-light w-100"></span>
+                <span class="placeholder bg-light w-100"></span>
+              </p>
 
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Non totam pariatur
@@ -88,12 +101,14 @@
                 quas ducimus aliquid. Praesentium ea aspernatur vero deserunt.
               </p>
 
-              <img
-                data-album="easyFrontend"
-                class="post-image"
-                src="https://picsum.photos/1368/800"
-                alt="Picsum photos"
-              />
+              <div class="ratio ratio-16x9 bg-light mb-3">
+                <img
+                  data-album="easyFrontend"
+                  class="post-image"
+                  src="https://picsum.photos/id/123/1368/800"
+                  alt="Picsum photos"
+                />
+              </div>
 
               <p>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci suscipit
@@ -113,19 +128,24 @@
                 quas ducimus aliquid. Praesentium ea aspernatur vero deserunt.
               </p>
 
-              <img
-                data-album="easyFrontend"
-                class="post-image"
-                src="https://picsum.photos/1368/1000"
-                alt="Picsum photos"
-              />
+              <div class="ratio ratio-16x9 bg-light mb-3">
+                <img
+                  data-album="easyFrontend"
+                  class="post-image"
+                  src="https://picsum.photos/1368/800"
+                  alt="Picsum photos"
+                />
+              </div>
 
               <p>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci suscipit
                 inventore hic tenetur, dolor iusto dolorum rem, non error, saepe quia dignissimos
                 quas ducimus aliquid. Praesentium ea aspernatur vero deserunt.
               </p>
-              <img class="post-image" src="https://picsum.photos/1368/1000" alt="Picsum photos" />
+
+              <div class="ratio ratio-16x9 bg-light mb-3">
+                <img class="post-image" src="https://picsum.photos/1368/800" alt="Picsum photos" />
+              </div>
 
               <p>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci suscipit

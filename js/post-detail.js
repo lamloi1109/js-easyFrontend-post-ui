@@ -19,7 +19,7 @@ function renderPostDetail(post) {
   // title
   setTextContent(document, '#postDetailTitle', post.title)
   // author
-  setTextContent(document, '#postDetailAuthor', post.author)
+  setTextContent(document, '#postDetailAuthor', 'by ' + post.author)
   // time
   setTextContent(
     document,
@@ -45,12 +45,6 @@ function renderPostDetail(post) {
     // fetch data
     const post = await postAPI.getById(postId)
     renderPostDetail(post[0])
-    registerLightBox({
-      lightBoxElementSelector: '.light-box',
-      previousButtonSelector: '.light-box-main .previous',
-      nextButtonSelector: '.light-box-main .next',
-      closeButtonSelector: '.light-box-main .close',
-    })
     registerLightBox({
       lightBoxElementSelector: '.light-box',
       previousButtonSelector: '.light-box-main .previous',
