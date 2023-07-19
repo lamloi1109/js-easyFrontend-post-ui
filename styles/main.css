@@ -10,6 +10,7 @@ body {
   flex-flow: column;
   min-height: 100vh;
   min-width: 100vw;
+  font-display: 'optional';
   font-family: 'Rubik', sans-serif;
   overflow-x: hidden;
 }
