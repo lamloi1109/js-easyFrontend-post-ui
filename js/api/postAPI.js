@@ -1,4 +1,4 @@
-import instanceAxios from './axiosClient.js';
+import instanceAxios from './axiosClient.js'
 
 // Có 2 dạng import và export gọi là
 // default
@@ -21,7 +21,7 @@ import instanceAxios from './axiosClient.js';
 
 const postAPI = {
   getAll(params) {
-    return instanceAxios.get('/posts', { params });
+    return instanceAxios.get('/posts', { params })
   },
 
   getById(postId) {
@@ -29,21 +29,21 @@ const postAPI = {
       params: {
         id: postId,
       },
-    });
+    })
   },
   add(data) {
     return instanceAxios.post('/posts', {
-      data,
-    });
+      ...data,
+    })
   },
   update(data) {
     return instanceAxios.patch(`/posts/${data.id}`, {
-      params,
-    });
+      data,
+    })
   },
   remove(postId) {
-    return instanceAxios.delete(`/posts/${postId}`);
+    return instanceAxios.delete(`/posts/${postId}`)
   },
-};
+}
 
-export default postAPI;
+export default postAPI
