@@ -2,7 +2,7 @@ import { setBackgroundImage, setTextContent } from './common.js'
 
 function closeLightBox(lightBoxElement) {
   if (!lightBoxElement) return
-  lightBoxElement.classList.add('hide')
+  lightBoxElement.classList.remove('show')
 
   const body = document.querySelector('body')
   if (!body) return
@@ -14,7 +14,7 @@ function closeLightBox(lightBoxElement) {
 function showLightBox({ lightBoxElement, currentImageIndex, totalImage, imageUrl, imageName }) {
   if (!lightBoxElement) return
 
-  lightBoxElement.classList.remove('hide')
+  lightBoxElement.classList.add('show')
   // show image
   const lightBoxMainElement = lightBoxElement.querySelector('.light-box-main')
   if (!lightBoxMainElement) return

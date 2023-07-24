@@ -71,7 +71,7 @@
               </p>
             </div>
 
-            <form id="postForm" class="post-form">
+            <form id="postForm" name="postForm" class="post-form">
               <div class="form-group">
                 <label for="postTitle">Title</label>
                 <input
@@ -102,11 +102,39 @@
               </div>
 
               <div class="form-group">
+                <input
+                  type="radio"
+                  name="ChooseTypeRadio"
+                  id="ChooseTypeRadio"
+                  value="imgJson"
+                  data-radioId="imgJson"
+                />
+                <label for="imgFile">Random image using picsum photos</label>
+              </div>
+
+              <div class="form-group">
+                <input
+                  type="radio"
+                  name="ChooseTypeRadio"
+                  id="ChooseTypeRadio"
+                  value="imgFormData"
+                  data-radioId="imgFormData"
+                />
+                <label for="ChooseTypeRadio">Uploaded image manually</label>
+              </div>
+
+              <div class="form-group" id="imgFormData" hidden>
+                <label for="postImage">Choose Image</label>
+                <input type="file" name="postImage" id="postImage" />
+              </div>
+
+              <div class="form-group" id="imgJson" hidden>
                 <label for="postChangeImage">Image</label>
                 <small id="passwordHelpBlock" class="form-text text-muted">
                   We&apos;re using
                   <a href="https://picsum.photos">Picsum service</a> to get a random image.
                 </small>
+                <br />
                 <button type="button" id="postChangeImage" class="btn btn-dark">
                   Change post image
                 </button>
@@ -131,6 +159,6 @@
       crossorigin="anonymous"
     ></script>
     <!-- Scripts should be placed here to prevent blocking render UI -->
-    <!-- <script type="module" src="./js/add-edit-post.js"></script> -->
+    <script type="module" src="./js/add-edit-post.js"></script>
   </body>
 </html>

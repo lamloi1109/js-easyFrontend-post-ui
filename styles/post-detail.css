@@ -41,8 +41,8 @@ section.hero {
   justify-content: center;
   cursor: pointer;
   transition: all 1s ease-in-out;
-  visibility: visible;
-  opacity: 1;
+  visibility: hidden;
+  opacity: 0;
 }
 
 /* .container {
@@ -112,7 +112,7 @@ section.hero {
 .light-box-main #lightBoxImageNumber {
   font-size: 1.2rem;
 }
-.hide {
-  visibility: hidden;
-  opacity: 0;
+.show {
+  visibility: visible;
+  opacity: 1;
 }

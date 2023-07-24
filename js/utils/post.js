@@ -32,12 +32,21 @@ export function createLiElement(post) {
   setTextContent(liElement, `[data-id=timeSpan]`, dayjs().from(dayjs(post.updatedAt)))
 
   const postItemElement = liElement.querySelector('.post-item')
-  console.log(postItemElement)
   // handle post click
-  postItemElement.addEventListener('click', () => {
-    console.log('click')
+  postItemElement.addEventListener('click', (event) => {
+    const menu = postItemElement.querySelector(`[data-id='menu']`)
+    if (menu && menu.contains(event.target)) return
+    // if (event.target.className === '.post-item-menu') return
     const url = `${window.location.origin}/post-detail.html?id=${post.id}`
-    // history.pushState({}, '', url)
+    window.location.assign(url)
+    return
+  })
+
+  const editButton = liElement.querySelector(`div[data-id='edit']`)
+  if (!editButton) return
+  editButton.addEventListener('click', (event) => {
+    // event.stopPropagation()
+    const url = `${window.location.origin}/add-edit-post.html?id=${post.id}`
     window.location.assign(url)
     return
   })
