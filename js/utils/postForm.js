@@ -19,7 +19,6 @@ export function initFormValue(formData, formName) {
   // desc
   setFormValue(formData, 'description', 'textarea')
 
-
   postForm.addEventListener('submit', (event) => {
     handleFormSubmit(event, formData)
   })
