@@ -13,22 +13,32 @@ function setBackgroundImage(element, url) {
   if (!element || !url) return
   element.style.backgroundImage = `url(${url})`
 }
-function handleChangePostButton(formData, elementId) {
-  const changePostButton = document.getElementById(elementId)
-  if (!elementId || !changePostButton) return
+
+async function handleChangePostButton(event, formData) {
   const postImageHeroElement = document.getElementById('postHeroImage')
   if (!postImageHeroElement) return
-  changePostButton.addEventListener('click', async () => {
-    const { url } = await fetch('https://picsum.photos/1378/400')
-    formData.imageUrl = url
-    setBackgroundImage(postImageHeroElement, url)
-  })
+
+  const { url } = await fetch('https://picsum.photos/1378/400')
+  formData.imageUrl = url
+  setBackgroundImage(postImageHeroElement, url)
+  console.log(formData)
 }
 
-function initInput({ formData, inputType, inputSelector, inputEvent, onChange }) {
-  const input = document.querySelector(`input[type='${inputType}']${inputSelector}`)
-  if (!input) return
-  input.addEventListener(`${inputEvent}`, (event) => {
+function initElement({
+  formData,
+  elementName,
+  elementType,
+  elementSelector,
+  elementEvent,
+  onChange,
+}) {
+  const selector = `${elementName}${
+    elementName === 'input' ? `[type='${elementType}']` : ''
+  }${elementSelector}`
+
+  const element = document.querySelector(selector)
+  if (!element) return
+  element.addEventListener(`${elementEvent}`, (event) => {
     onChange(event.target.value, formData)
   })
 }
@@ -46,64 +56,83 @@ function showElement(id) {
 
 ;(() => {
   document.addEventListener('DOMContentLoaded', async () => {
-    const urlSearchParams = new URLSearchParams(window.location.search)
-    // default params
-    let post = {
-      title: '',
-      author: '',
-      description: '',
-      imageUrl: '',
-    }
-    if (urlSearchParams.get('id')) {
+    try {
+      const urlSearchParams = new URLSearchParams(window.location.search)
       const postId = urlSearchParams.get('id')
-      const data = await postAPI.getById(postId)
-      post = data[0]
+      // default params
+      // add Boolean to implicit
+      const post = Boolean(postId)
+        ? (await postAPI.getById(postId))[0]
+        : {
+            title: '',
+            author: '',
+            description: '',
+            imageUrl: '',
+          }
+
+      // edit or update
+      // init value form
+      // post form
+      // handle form submit
+      // handle all button
+      initFormValue(post, 'postForm')
+      initElement({
+        formData: post,
+        elementName: 'input',
+        elementType: 'text',
+        elementSelector: `[name='title']`,
+        elementEvent: 'input',
+        onChange: (title, formData) => (formData.title = title),
+      })
+      initElement({
+        formData: post,
+        elementName: 'input',
+        elementType: 'text',
+        elementSelector: `[name='author']`,
+        elementEvent: 'input',
+        onChange: (author, formData) => {
+          formData.author = author
+        },
+      })
+      initElement({
+        formData: post,
+        elementName: 'textarea',
+        elementType: 'textarea',
+        elementSelector: `[name='description']`,
+        elementEvent: 'input',
+        onChange: (description, formData) => (formData.description = description),
+      })
+      initElement({
+        formData: post,
+        elementName: 'input',
+        elementType: 'radio',
+        elementSelector: `[data-radioId='imgJson']`,
+        elementEvent: 'change',
+        onChange: (id, formData) => {
+          showElement(id)
+        },
+      })
+      initElement({
+        formData: post,
+        elementName: 'input',
+        elementType: 'radio',
+        elementSelector: `[data-radioId='imgFormData']`,
+        elementEvent: 'change',
+        onChange: (id, formData) => {
+          showElement(id)
+        },
+      })
+
+      initElement({
+        formData: post,
+        elementName: 'Button',
+        elementType: 'Button',
+        elementSelector: `#postChangeImage`,
+        elementEvent: 'click',
+        onChange: (event, formData) => handleChangePostButton(event, formData),
+      })
+    } catch (error) {
+      console.log('add edit error', error)
     }
-    // edit or update
-    // init value form
-    // post form
-    // handle form submit
-    // handle all button
-    initInput({
-      formData: post,
-      inputType: 'input',
-      inputSelector: `[name='title']`,
-      inputEvent: 'input',
-      onChange: (title, formData) => (formData.title = title),
-    })
-    initInput({
-      formData: post,
-      inputType: 'input',
-      inputSelector: `[name='author']`,
-      inputEvent: 'input',
-      onChange: (author, formData) => (formData.author = author),
-    })
-    initInput({
-      formData: post,
-      inputType: 'textarea',
-      inputSelector: `[name='description']`,
-      inputEvent: 'input',
-      onChange: (description, formData) => (formData.description = description),
-    })
-    initInput({
-      formData: post,
-      inputType: 'radio',
-      inputSelector: `[data-radioId='imgJson']`,
-      inputEvent: 'change',
-      onChange: (id, formData) => {
-        showElement(id)
-      },
-    })
-    initInput({
-      formData: post,
-      inputType: 'radio',
-      inputSelector: `[data-radioId='imgFormData']`,
-      inputEvent: 'change',
-      onChange: (id, formData) => {
-        showElement(id)
-      },
-    })
-    handleChangePostButton(post, 'postChangeImage')
-    initFormValue(post, 'postForm')
   })
 })()
