@@ -1,5 +1,6 @@
 import postAPI from '../api/postAPI.js'
 import { setBackgroundImage, setInputValue } from './common.js'
+import { validateForField } from './validation.js'
 
 function setFormValue(form, selector, formValue) {
   setInputValue({
@@ -20,10 +21,47 @@ function setFormValues(form, formValues) {
   setFormValue(form, `input[name='imageUrl']`, formValues?.imageUrl)
 }
 
+function validateFormValues(form, formValues) {
+  if (!form) return false
+  let isValid = false
+
+  // title
+  isValid = validateForField({
+    form,
+    value: formValues?.title,
+    pattern: '[A-Z][a-z]+',
+    fieldSelector: `input[name='title']`,
+  })
+
+  // author
+  isValid = validateForField({
+    form,
+    value: formValues?.author,
+    pattern: '',
+    fieldSelector: `input[name='author']`,
+  })
+  // desc
+  isValid = validateForField({
+    form,
+    value: formValues?.description,
+    pattern: '',
+    fieldSelector: `textarea[name='description']`,
+  })
+  // imageUrl
+  isValid = validateForField({
+    form,
+    value: formValues?.imageUrl,
+    pattern: '',
+    fieldSelector: `input[name='imageUrl']`,
+  })
+  console.log(isValid)
+  return isValid
+}
+
 function getFormValues(form) {
   const formValues = {}
   // type formData to type json Data
-  // formData can't not accept input unchecked or disabled 
+  // formData can't not accept input unchecked or disabled
   const data = new FormData(form)
   for (const [key, value] of data) {
     formValues[key] = value
@@ -45,25 +83,19 @@ export function initFormValue({ defaultValues, formName, onSubmit }) {
     event.preventDefault()
     // get form values
     const formValues = getFormValues(postForm)
-    console.log(formValues)
     // validation
-    // using vanilla js
-    // String value
-    // check empty value
-    // check length
-    // check special character
+    let isValid = validateFormValues(postForm, formValues)
+    // ? how set params for validation fnc?
 
-    // Image
-    // Check type image
-    // number of file
-    // Check width and height
-
-    // imageUrl -> Check url valid
-
-    // using yup
+    // if validation is invalid then set class invalid field
+    // else set class valid for field
 
     // if trigger submit CallBack
     // otherwise
-    onSubmit?.(event, defaultValues)
+
+    // postForm.classList.remove('was-validated')
+    postForm.classList.add('was-validated')
+
+    if (isValid) onSubmit?.(event, defaultValues)
   })
 }

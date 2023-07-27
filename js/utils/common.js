@@ -6,6 +6,7 @@ export function setTextContent(parent, selector, textContent) {
 
   element.textContent = textContent
 }
+
 export function truncateText(text, maxLength) {
   if (text.length <= maxLength) return text
 
