@@ -14,8 +14,14 @@ export function truncateText(text, maxLength) {
 }
 
 export function setBackgroundImage(element, url) {
-  if (!element) return
+  if (!element || !url) return
   element.style.backgroundImage = `url('${url}')`
   element.style.backgroundRepeat = 'none'
   element.style.backgroundSize = 'cover'
+}
+
+export function setInputValue({ parent, selector, value }) {
+  if (!parent) return
+  const element = parent.querySelector(selector)
+  if (element) element.value = value
 }

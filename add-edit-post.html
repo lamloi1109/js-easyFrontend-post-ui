@@ -125,7 +125,7 @@
 
               <div class="form-group" id="imgFormData" hidden>
                 <label for="postImage">Choose Image</label>
-                <input type="file" name="postImage" id="postImage" />
+                <!-- <input type="file" name="postImage" id="postImage" /> -->
               </div>
 
               <div class="form-group" id="imgJson" hidden>
@@ -134,10 +134,16 @@
                   We&apos;re using
                   <a href="https://picsum.photos">Picsum service</a> to get a random image.
                 </small>
-                <br />
-                <button type="button" id="postChangeImage" class="btn btn-dark">
-                  Change post image
-                </button>
+                <input
+                  type="hidden"
+                  name="imageUrl"
+                  value=""
+                />
+                <div>
+                  <button type="button" id="postChangeImage" class="btn btn-dark">
+                    Change post image
+                  </button>
+                </div>
               </div>
 
               <div class="text-center">

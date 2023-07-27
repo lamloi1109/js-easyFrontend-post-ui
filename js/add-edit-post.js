@@ -7,25 +7,24 @@
 
 import axios, { Axios } from 'axios'
 import postAPI from './api/postAPI.js'
-import { initFormValue } from './utils/index.js'
+import { initFormValue, setBackgroundImage } from './utils/index.js'
 
-function setBackgroundImage(element, url) {
-  if (!element || !url) return
-  element.style.backgroundImage = `url(${url})`
-}
 
-async function handleChangePostButton(event, formData) {
+async function handleChangePostButton(event, defaultValues) {
   const postImageHeroElement = document.getElementById('postHeroImage')
   if (!postImageHeroElement) return
 
   const { url } = await fetch('https://picsum.photos/1378/400')
-  formData.imageUrl = url
+  defaultValues.imageUrl = url
   setBackgroundImage(postImageHeroElement, url)
-  console.log(formData)
+}
+
+async function handleFormSubmit(event, defaultValues) {
+  // console.log(defaultValues);
 }
 
 function initElement({
-  formData,
+  defaultValues,
   elementName,
   elementType,
   elementSelector,
@@ -39,7 +38,7 @@ function initElement({
   const element = document.querySelector(selector)
   if (!element) return
   element.addEventListener(`${elementEvent}`, (event) => {
-    onChange(event.target.value, formData)
+    onChange(event.target.value, defaultValues)
   })
 }
 
@@ -61,7 +60,7 @@ function showElement(id) {
       const postId = urlSearchParams.get('id')
       // default params
       // add Boolean to implicit
-      const post = Boolean(postId)
+      const defaultValues = Boolean(postId)
         ? (await postAPI.getById(postId))[0]
         : {
             title: '',
@@ -75,61 +74,19 @@ function showElement(id) {
       // post form
       // handle form submit
       // handle all button
-      initFormValue(post, 'postForm')
-      initElement({
-        formData: post,
-        elementName: 'input',
-        elementType: 'text',
-        elementSelector: `[name='title']`,
-        elementEvent: 'input',
-        onChange: (title, formData) => (formData.title = title),
-      })
-      initElement({
-        formData: post,
-        elementName: 'input',
-        elementType: 'text',
-        elementSelector: `[name='author']`,
-        elementEvent: 'input',
-        onChange: (author, formData) => {
-          formData.author = author
-        },
-      })
-      initElement({
-        formData: post,
-        elementName: 'textarea',
-        elementType: 'textarea',
-        elementSelector: `[name='description']`,
-        elementEvent: 'input',
-        onChange: (description, formData) => (formData.description = description),
-      })
-      initElement({
-        formData: post,
-        elementName: 'input',
-        elementType: 'radio',
-        elementSelector: `[data-radioId='imgJson']`,
-        elementEvent: 'change',
-        onChange: (id, formData) => {
-          showElement(id)
-        },
-      })
-      initElement({
-        formData: post,
-        elementName: 'input',
-        elementType: 'radio',
-        elementSelector: `[data-radioId='imgFormData']`,
-        elementEvent: 'change',
-        onChange: (id, formData) => {
-          showElement(id)
-        },
+      initFormValue({
+        defaultValues,
+        formName: 'postForm',
+        onSubmit: (event, defaultValues) => handleFormSubmit(event, defaultValues),
       })
 
       initElement({
-        formData: post,
+        defaultValues,
         elementName: 'Button',
         elementType: 'Button',
         elementSelector: `#postChangeImage`,
         elementEvent: 'click',
-        onChange: (event, formData) => handleChangePostButton(event, formData),
+        onChange: (event, defaultValues) => handleChangePostButton(event, defaultValues),
       })
     } catch (error) {
       console.log('add edit error', error)
