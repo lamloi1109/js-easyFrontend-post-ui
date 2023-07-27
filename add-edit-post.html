@@ -71,7 +71,8 @@
               </p>
             </div>
 
-            <form id="postForm" name="postForm" class="post-form">
+            <form id="postForm" name="postForm" class="post-form .needs-validation">
+          
               <div class="form-group">
                 <label for="postTitle">Title</label>
                 <input
@@ -81,7 +82,7 @@
                   placeholder="Eg: Learning JS is fun"
                 />
                 <div class="invalid-feedback">
-                  Ooops! Please write a nice title for your post &gt;.&lt;
+                  Oops! Please write a nice title for your post &gt;.&lt;
                 </div>
               </div>
 
@@ -134,11 +135,7 @@
                   We&apos;re using
                   <a href="https://picsum.photos">Picsum service</a> to get a random image.
                 </small>
-                <input
-                  type="hidden"
-                  name="imageUrl"
-                  value=""
-                />
+                <input type="hidden" name="imageUrl" value="" />
                 <div>
                   <button type="button" id="postChangeImage" class="btn btn-dark">
                     Change post image
