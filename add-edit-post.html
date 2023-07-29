@@ -72,7 +72,6 @@
             </div>
 
             <form id="postForm" name="postForm" class="post-form .needs-validation">
-          
               <div class="form-group">
                 <label for="postTitle">Title</label>
                 <input
@@ -80,6 +79,8 @@
                   class="form-control"
                   name="title"
                   placeholder="Eg: Learning JS is fun"
+                  required
+                  pattern="/^[A-Z][a-z]${1,}/g"
                 />
                 <div class="invalid-feedback">
                   Oops! Please write a nice title for your post &gt;.&lt;
@@ -93,13 +94,22 @@
                   class="form-control"
                   name="author"
                   placeholder="Eg: Paul Nguyen"
+                  required
+                  pattern="/^[A-Z][a-z]${1,}/g"
                 />
                 <div class="invalid-feedback">Please enter author of this post!</div>
               </div>
 
               <div class="form-group">
                 <label for="postDescription">Description</label>
-                <textarea class="form-control" name="description" rows="3"></textarea>
+                <textarea
+                  class="form-control"
+                  name="description"
+                  rows="3"
+                  required
+                  pattern="/^[A-Z][a-z]${1,}/g"
+                ></textarea>
+                <div class="invalid-feedback">Please enter author of this post!</div>
               </div>
 
               <div class="form-group">

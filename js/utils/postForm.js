@@ -37,14 +37,14 @@ function validateFormValues(form, formValues) {
   isValid = validateForField({
     form,
     value: formValues?.author,
-    pattern: '',
+    pattern: '[A-Z][a-z]+',
     fieldSelector: `input[name='author']`,
   })
   // desc
   isValid = validateForField({
     form,
     value: formValues?.description,
-    pattern: '',
+    pattern: '[A-Z][a-z]+',
     fieldSelector: `textarea[name='description']`,
   })
   // imageUrl
@@ -84,7 +84,7 @@ export function initFormValue({ defaultValues, formName, onSubmit }) {
     // get form values
     const formValues = getFormValues(postForm)
     // validation
-    let isValid = validateFormValues(postForm, formValues)
+    // let isValid = validateFormValues(postForm, formValues)
     // ? how set params for validation fnc?
 
     // if validation is invalid then set class invalid field
@@ -99,3 +99,5 @@ export function initFormValue({ defaultValues, formName, onSubmit }) {
     if (isValid) onSubmit?.(event, defaultValues)
   })
 }
+
+// Can validate for form with several method as using built-in form or using javascript and using yup
