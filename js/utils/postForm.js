@@ -1,5 +1,5 @@
 import postAPI from '../api/postAPI.js'
-import { setBackgroundImage, setInputValue } from './common.js'
+import { setBackgroundImage, setInputValue, setTextContent } from './common.js'
 import { validateForField } from './validation.js'
 
 function setFormValue(form, selector, formValue) {
@@ -21,40 +21,71 @@ function setFormValues(form, formValues) {
   setFormValue(form, `input[name='imageUrl']`, formValues?.imageUrl)
 }
 
+function getTitleError(form) {
+  const titleElement = form.querySelector(`[name='title']`)
+  if (!titleElement) return
+  // required
+  if (titleElement.validity.valueMissing) {
+    return 'Please enter title!'
+  }
+  // at least two word
+  if (titleElement.validity.tooLong) {
+    return 'Too Long!'
+  }
+  if (titleElement.validity.tooShort) {
+    return 'Too Short!'
+  }
+  return ''
+}
+
+function getAuthorError(form) {
+  const authorElement = form.querySelector(`[name='author']`)
+  if (!authorElement) return
+  // required
+  if (authorElement.validity.valueMissing) {
+    return 'Please enter author!'
+  }
+  // at least two word
+  if (authorElement.validity.tooLong) {
+    return 'Too Long!'
+  }
+  if (authorElement.validity.tooShort) {
+    return 'Too Short!'
+  }
+  return ''
+}
+
+function getDescriptionError(form) {
+  return ''
+}
+
+function getImageUrlError(form) {
+  return ''
+}
+
 function validateFormValues(form, formValues) {
-  if (!form) return false
-  let isValid = false
+  // get errors
+  const errors = {
+    title: getTitleError(form),
+    author: getAuthorError(form),
+    description: getDescriptionError(form),
+    imageUrl: getImageUrlError(form),
+  }
+  // set errors
+  for (const key in errors) {
+    const element = form.querySelector(`[name='${key}']`)
+    if (element) {
+      // set custom error message
+      element.setCustomValidity(errors[key])
+      // set text message
+      setTextContent(element.parentElement, '.invalid-feedback', errors[key])
+    }
+  }
+  // add was-validated class to form element after set error message for fields
+  // checkValidity trigger invalid event to validate form
+  const isValid = form.checkValidity()
+  if (!isValid) form.classList.add('was-validated')
 
-  // title
-  isValid = validateForField({
-    form,
-    value: formValues?.title,
-    pattern: '[A-Z][a-z]+',
-    fieldSelector: `input[name='title']`,
-  })
-
-  // author
-  isValid = validateForField({
-    form,
-    value: formValues?.author,
-    pattern: '',
-    fieldSelector: `input[name='author']`,
-  })
-  // desc
-  isValid = validateForField({
-    form,
-    value: formValues?.description,
-    pattern: '',
-    fieldSelector: `textarea[name='description']`,
-  })
-  // imageUrl
-  isValid = validateForField({
-    form,
-    value: formValues?.imageUrl,
-    pattern: '',
-    fieldSelector: `input[name='imageUrl']`,
-  })
-  console.log(isValid)
   return isValid
 }
 
@@ -84,7 +115,8 @@ export function initFormValue({ defaultValues, formName, onSubmit }) {
     // get form values
     const formValues = getFormValues(postForm)
     // validation
-    let isValid = validateFormValues(postForm, formValues)
+    let isValid = false
+    // let isValid = validateFormValues(postForm, formValues)
     // ? how set params for validation fnc?
 
     // if validation is invalid then set class invalid field
@@ -93,9 +125,8 @@ export function initFormValue({ defaultValues, formName, onSubmit }) {
     // if trigger submit CallBack
     // otherwise
 
-    // postForm.classList.remove('was-validated')
-    postForm.classList.add('was-validated')
+    if (!validateFormValues(postForm, formValues)) return
 
-    if (isValid) onSubmit?.(event, defaultValues)
+    onSubmit?.(event, defaultValues)
   })
 }

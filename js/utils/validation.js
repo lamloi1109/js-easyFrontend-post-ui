@@ -22,3 +22,11 @@ export function validateForField({ form, value, pattern, fieldSelector }) {
 
   return isValid
 }
+
+// The Constraint Validation API
+// validationMessage: Trả về message nếu fail otherwise trả về empty string
+// validity: Trả về validity state object 
+// willvalidate
+// checkValidity: Kiểm tra form có hợp lệ hay không. Trigger invalid event
+// reportValidity: Khi validate fail show message 
+// setCustomValidity(message): Custom lại message
